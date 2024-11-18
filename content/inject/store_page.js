@@ -39,7 +39,7 @@ class Page {
               root = element.shadowRoot;
               text = root.textContent;
             } else {
-              root = element.createShadowRoot();
+              root = element.attachShadow({mode: 'open'});
             }
 
             root.textContent = text.replace(/chrome/ig, 'Opera');

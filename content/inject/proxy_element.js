@@ -3,7 +3,8 @@ class ProxyElement extends HTMLElement {
   static get EVENT_API_DEF() { return 'api-def'; }
   static get EVENT_API_RESPONSE() { return 'api-response'; }
   static get EVENT_MESSAGE() { return 'message'; }
-  createdCallback() {
+  constructor() {
+    super();
     this.callbacks_ = new CallbackRegistry();
     this.addEventListener(
         this.constructor.EVENT_API_DEF, e => this.build_(e.detail));
@@ -78,7 +79,6 @@ class ProxyElement extends HTMLElement {
       api[obj] = api[obj] || {};
       api = api[obj];
     }
-
     for (let item of def.data) {
       if (item.type === Api.TYPE_OBJECT) {
         api[item.name] = item.value;
@@ -91,4 +91,4 @@ class ProxyElement extends HTMLElement {
   }
 }
 
-document.registerElement(ProxyElement.ELEMENT_NAME, ProxyElement);
+customElements.define(ProxyElement.ELEMENT_NAME, ProxyElement);
